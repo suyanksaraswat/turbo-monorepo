@@ -2,17 +2,24 @@ import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-const sanityClient = createClient({
-  projectId: process.env.SANITY_PROJECT_ID,
-  dataset: process.env.SANITY_DATASET,
-  apiVersion: "2023-05-03",
-  useCdn: false,
-});
+function sanityClientService(
+  projectId: string | undefined,
+  dataset: string | undefined
+) {
+  const sanityClient = createClient({
+    projectId,
+    dataset,
+    apiVersion: "2023-05-03",
+    useCdn: false,
+  });
 
-const builder = imageUrlBuilder(sanityClient);
+  const builder = imageUrlBuilder(sanityClient);
 
-function urlFor(source: SanityImageSource) {
-  return builder.image(source);
+  function urlFor(source: SanityImageSource) {
+    return builder.image(source);
+  }
+
+  return { sanityClient, urlFor };
 }
 
-export { sanityClient, urlFor };
+export default sanityClientService;
