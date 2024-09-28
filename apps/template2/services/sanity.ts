@@ -1,12 +1,9 @@
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import sanityClientService from "@repo/sanity-config/sanityClient";
+import { sanityClient, urlFor } from "./sanityClient";
 
 export const fetchData = async () => {
   const query = `*[_type == "client" && _id == "${process.env.SANITY_CLIENT_ID}" ]`;
-  const data = await sanityClientService(
-    process.env.SANITY_PROJECT_ID,
-    process.env.SANITY_DATASET
-  ).sanityClient.fetch(query, {}, { cache: "no-store" });
+  const data = await sanityClient.fetch(query, {}, { cache: "no-store" });
 
   const res = data?.[0];
 
@@ -89,10 +86,5 @@ export const fetchData = async () => {
 };
 
 export const imageUrl = (image: SanityImageSource) => {
-  return sanityClientService(
-    process.env.SANITY_PROJECT_ID,
-    process.env.SANITY_DATASET
-  )
-    .urlFor(image)
-    .url();
+  return urlFor(image).url();
 };
