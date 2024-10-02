@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev --turbo -p 3001",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -11,6 +11,8 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@repo/ui": "*",
+    "@sanity/client": "^6.22.0",
+    "@sanity/image-url": "^1.0.2",
     "add": "^2.0.6",
     "framer-motion": "^11.9.0",
     "next": "14.2.6",
@@ -21,7 +23,6 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
-    "@repo/sanity-config": "*",
     "@repo/tailwind-config": "*",
     "@repo/typescript-config": "*",
     "@types/node": "^20",
